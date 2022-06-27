@@ -13,7 +13,7 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit self;} {
-      imports = [./parts/devshells.nix];
+      imports = [./parts/checksums ./parts/devshells.nix];
       systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
     };
 }
