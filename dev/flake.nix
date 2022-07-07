@@ -23,6 +23,7 @@
 
       perSystem = {
         config,
+        lib,
         pkgs,
         system,
         ...
@@ -32,7 +33,7 @@
             src = ./..;
             hooks = {
               alejandra.enable = true;
-              nix-linter.enable = false;
+              nix-linter.enable = pkgs.stdenv.isLinux;
               nixfmt.enable = false;
               nixpkgs-fmt.enable = false;
               prettier.enable = true;
@@ -42,7 +43,7 @@
         };
 
         devShells.default = pkgs.mkShell {
-          buildInputs = [pkgs.pre-commit];
+          buildInputs = with inputs.pre-commit.packages.${system}; [alejandra pre-commit] ++ lib.optional (pkgs.stdenv.isLinux) [nix-linter];
           inherit (config.checks.pre-commit-check) shellHook;
         };
 
