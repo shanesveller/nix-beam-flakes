@@ -1,11 +1,5 @@
-{self, ...}: {
-  perSystem = {
-    config,
-    inputs',
-    pkgs,
-    self',
-    ...
-  }: {
+{...}: {
+  perSystem = {pkgs, ...}: {
     devShells.default = pkgs.mkShell {buildInputs = [];};
   };
 }

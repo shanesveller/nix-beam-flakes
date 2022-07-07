@@ -1,8 +1,7 @@
-{self, ...}: {
+{...}: {
   perSystem = {
     config,
     pkgs,
-    self',
     ...
   }: {
     devShells.update = pkgs.mkShell {

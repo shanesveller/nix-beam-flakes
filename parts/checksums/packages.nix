@@ -1,4 +1,4 @@
-{self, ...}: {
+{...}: {
   perSystem = {
     config,
     lib,
