@@ -37,13 +37,18 @@
               nixfmt.enable = false;
               nixpkgs-fmt.enable = false;
               prettier.enable = true;
-              statix.enable = false;
+              statix.enable = pkgs.stdenv.isLinux;
+            };
+            settings = {
+              statix.ignore = [".direnv/*"];
             };
           };
         };
 
         devShells.default = pkgs.mkShell {
-          buildInputs = with inputs.pre-commit.packages.${system}; [alejandra pre-commit] ++ lib.optional (pkgs.stdenv.isLinux) [nix-linter];
+          buildInputs = with inputs.pre-commit.packages.${system};
+            [alejandra pre-commit]
+            ++ lib.optionals pkgs.stdenv.isLinux [nix-linter statix];
           inherit (config.checks.pre-commit-check) shellHook;
         };
 
