@@ -46,9 +46,11 @@
         };
 
         devShells.default = pkgs.mkShell {
-          buildInputs = with inputs.pre-commit.packages.${system};
-            [alejandra pre-commit]
-            ++ lib.optionals pkgs.stdenv.isLinux [nix-linter statix];
+          buildInputs =
+            [pkgs.just]
+            ++ (with inputs.pre-commit.packages.${system};
+              [alejandra pre-commit]
+              ++ lib.optionals pkgs.stdenv.isLinux [nix-linter statix]);
           inherit (config.checks.pre-commit-check) shellHook;
         };
 
