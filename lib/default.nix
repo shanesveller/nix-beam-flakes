@@ -51,6 +51,8 @@
       else {}
     );
 
+  parseToolVersions = import ./parseToolVersions.nix {inherit lib;};
+
   versionCompatible = import ./versionCompatible.nix {
     inherit lib;
   };
@@ -62,4 +64,5 @@
 in {
   inherit compatibleVersions versions;
   inherit mkElixir mkErlang mkPackageSet;
+  inherit parseToolVersions;
 }
