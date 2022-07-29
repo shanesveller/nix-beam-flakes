@@ -28,6 +28,29 @@
   in
     basePkg.override {inherit sha256 version;};
 
+  mkPackageSet = {
+    elixirVersion,
+    erlangVersion,
+    languageServers ? false,
+    pkgs,
+  }: let
+    erlang = mkErlang pkgs erlangVersion versions.erlang.${erlangVersion};
+    beamPkgs = pkgs.beam.packagesWith erlang;
+    elixir = mkElixir beamPkgs elixirVersion versions.elixir.${elixirVersion};
+  in
+    {
+      inherit (beamPkgs) erlang;
+      inherit elixir;
+    }
+    // (
+      if languageServers
+      then {
+        inherit (beamPkgs) erlang-ls;
+        elixir_ls = beamPkgs.elixir_ls.override {inherit elixir;};
+      }
+      else {}
+    );
+
   versionCompatible = import ./versionCompatible.nix {
     inherit lib;
   };
@@ -38,4 +61,5 @@
   };
 in {
   inherit compatibleVersions versions;
+  inherit mkElixir mkErlang mkPackageSet;
 }
