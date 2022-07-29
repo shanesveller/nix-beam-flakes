@@ -3,11 +3,12 @@
   lib,
   ...
 }: {
-  perSystem = {config, pkgs, ...}: let
-    pkgSet = self.lib.mkPackageSet {
-      inherit pkgs;
-      elixirVersion = "1.13.4";
-      erlangVersion = "24.3.4.2";
+  perSystem = {
+    config,
+    pkgs,
+    ...
+  }: let
+    pkgSet = self.lib.packageSetFromToolVersions pkgs ../test/.tool-versions {
       languageServers = true;
     };
   in {
