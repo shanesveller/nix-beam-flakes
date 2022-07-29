@@ -51,6 +51,16 @@
       else {}
     );
 
+  packageSetFromToolVersions = pkgs: toolVersionsPath: args: let
+    asdfVersions = parseToolVersions toolVersionsPath;
+  in
+    mkPackageSet ({
+        elixirVersion = asdfVersions.elixir;
+        erlangVersion = asdfVersions.erlang;
+        inherit pkgs;
+      }
+      // args);
+
   parseToolVersions = import ./parseToolVersions.nix {inherit lib;};
 
   versionCompatible = import ./versionCompatible.nix {
@@ -64,5 +74,5 @@
 in {
   inherit compatibleVersions versions;
   inherit mkElixir mkErlang mkPackageSet;
-  inherit parseToolVersions;
+  inherit packageSetFromToolVersions parseToolVersions;
 }
