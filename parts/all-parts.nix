@@ -1,0 +1,6 @@
+{...}: {
+  imports = [
+    ./devshells.nix
+    ./checksums
+  ];
+}
