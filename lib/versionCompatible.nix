@@ -1,4 +1,7 @@
-{lib}: elixir: erlang: let
+{
+  lib,
+  normalizeElixir,
+}: elixir: erlang: let
   inherit (builtins) concatStringsSep length map splitVersion toString;
   inherit (lib.lists) findFirst;
   inherit (lib.strings) versionAtLeast versionOlder;
@@ -138,13 +141,15 @@
       else split;
   in
     concatStringsSep "." (map toString padded);
-  erlangN = normalizeOtp erlang;
+
+  elixir' = normalizeElixir elixir;
+  erlang' = normalizeOtp erlang;
   pred = bound:
     builtins.all (val: val) [
-      (versionOlder erlangN bound.max_erl)
-      (versionOlder elixir bound.max_el)
-      (versionAtLeast erlangN bound.min_erl)
-      (versionAtLeast elixir bound.min_el)
+      (versionOlder erlang' bound.max_erl)
+      (versionOlder elixir' bound.max_el)
+      (versionAtLeast erlang' bound.min_erl)
+      (versionAtLeast elixir' bound.min_el)
     ];
 in
   builtins.isAttrs (findFirst pred false bounds)

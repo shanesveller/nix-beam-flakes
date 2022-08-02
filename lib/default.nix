@@ -51,11 +51,17 @@
       else {}
     );
 
+  normalizeElixir = version: let
+    split = splitVersion version;
+    truncated = take 3 split;
+  in
+    concatStringsSep "." (map toString truncated);
+
   packageSetFromToolVersions = pkgs: toolVersionsPath: args: let
     asdfVersions = parseToolVersions toolVersionsPath;
   in
     mkPackageSet ({
-        elixirVersion = asdfVersions.elixir;
+        elixirVersion = normalizeElixir asdfVersions.elixir;
         erlangVersion = asdfVersions.erlang;
         inherit pkgs;
       }
@@ -63,9 +69,8 @@
 
   parseToolVersions = import ./parseToolVersions.nix {inherit lib;};
 
-  versionCompatible = import ./versionCompatible.nix {
-    inherit lib;
-  };
+  versionCompatible =
+    import ./versionCompatible.nix {inherit lib normalizeElixir;};
 
   versions = {
     elixir = importJSON ../data/elixir.json;
