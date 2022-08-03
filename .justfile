@@ -1,15 +1,15 @@
 default: show
 
 add-elixir version:
-    nix run .#add-elixir-version {{ version }}
+    nix run ./dev#add-elixir-version {{ version }}
 add-erlang version:
-    nix run .#add-otp-version {{ version }}
+    nix run ./dev#add-otp-version {{ version }}
 check:
     nix flake check
     nix flake check ./dev
 list-all-elixir:
-    nix run .#list-all-elixir
+    nix run ./dev#list-all-elixir
 list-all-erlang:
-    nix run .#list-all-otp
+    nix run ./dev#list-all-otp
 show:
     nix flake show
