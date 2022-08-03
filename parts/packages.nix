@@ -14,7 +14,7 @@
   in {
     checks.example = config.packages.example;
 
-    legacyPackages = {erlang_24_3_4_2 = pkgSet.erlang;};
+    legacyPackages = self.lib.compatibleVersionPackages pkgs;
 
     packages = {
       example = pkgs.linkFarmFromDrvs "beam-overlay" (__attrValues pkgSet);

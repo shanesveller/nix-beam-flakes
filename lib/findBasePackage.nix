@@ -6,10 +6,15 @@ in {
     major = elemAt split 0;
     minor = elemAt split 1;
   in
-    beamPkgs."elixir_${major}_${minor}";
+    if beamPkgs ? "elixir_${major}_${minor}"
+    then beamPkgs."elixir_${major}_${minor}"
+    else null;
 
   otpBasePackage = pkgs: version: let
+    inherit (pkgs.beam) interpreters;
     major = elemAt (splitVersion version) 0;
   in
-    pkgs.beam.interpreters."erlangR${major}";
+    if interpreters ? "erlangR${major}"
+    then interpreters."erlangR${major}"
+    else null;
 }
