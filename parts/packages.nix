@@ -3,6 +3,8 @@
   lib,
   ...
 }: {
+  imports = [./packages/phx_new.nix];
+
   perSystem = {
     config,
     pkgs,
