@@ -12,14 +12,16 @@
     };
 
     packages = let
-      jqPushChecksum = name: target: prefetcher:
+      jqPushChecksum = name: language: target: prefetcher:
         pkgs.writeShellScriptBin name ''
           set -ex -o pipefail
           version=$1
           targetFile=${target}
           checksum=$(${lib.getExe prefetcher} $version)
           editCommand=".[\"$version\"] = \"$checksum\""
-          ${pkgs.jq}/bin/jq --sort-keys "$editCommand" $targetFile | ${pkgs.moreutils}/bin/sponge $targetFile
+          ${lib.getExe pkgs.jq} --sort-keys "$editCommand" $targetFile | ${pkgs.moreutils}/bin/sponge $targetFile
+          ${lib.getExe pkgs.gitAndTools.git} add $targetFile
+          ${lib.getExe pkgs.gitAndTools.git} commit -m "feat(checksums): Add checksum for ${language} ''${version}"
         '';
       listGitHubReleases = name: repo:
         pkgs.writeShellScriptBin name ''
@@ -27,11 +29,11 @@
         '';
     in {
       add-elixir-version =
-        jqPushChecksum "add-elixir-version" "$PWD/data/elixir.json"
+        jqPushChecksum "add-elixir-version" "Elixir" "$PWD/data/elixir.json"
         config.packages.nix-prefetch-elixir;
 
       add-otp-version =
-        jqPushChecksum "add-otp-version" "$PWD/data/erlang.json"
+        jqPushChecksum "add-otp-version" "Erlang" "$PWD/data/erlang.json"
         config.packages.nix-prefetch-otp;
 
       list-all-elixir = listGitHubReleases "list-all-otp" "elixir-lang/elixir";
