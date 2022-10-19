@@ -1,8 +1,15 @@
-{self, ...}: {
+{
+  lib,
+  self,
+  ...
+}: {
   perSystem = {pkgs, ...}: let
     mkBeamShell = pkgSet:
       pkgs.mkShell {
-        packages = with pkgSet; [elixir elixir_ls erlang erlang-ls];
+        packages =
+          (with pkgSet; [elixir erlang])
+          ++ lib.optional (pkgSet ? "elixir_ls") pkgSet.elixir_ls
+          ++ lib.optional (pkgSet ? "erlang-ls") pkgSet.erlang-ls;
 
         shellHook = ''
           elixir --version
@@ -12,7 +19,7 @@
   in {
     devShells.asdf = let
       pkgSet = self.lib.packageSetFromToolVersions pkgs ../test/.tool-versions {
-        languageServers = true;
+        elixirLanguageServer = true;
       };
     in
       mkBeamShell pkgSet;
@@ -22,7 +29,7 @@
         inherit pkgs;
         elixirVersion = "1.14.1";
         erlangVersion = "25.1.1";
-        languageServers = true;
+        elixirLanguageServer = true;
       };
     in
       mkBeamShell pkgSet;

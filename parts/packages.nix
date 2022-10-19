@@ -9,7 +9,8 @@
     ...
   }: let
     pkgSet = self.lib.packageSetFromToolVersions pkgs ../test/.tool-versions {
-      languageServers = true;
+      elixirLanguageServer = true;
+      erlangLanguageServer = false;
     };
   in {
     checks.example = config.packages.example;
@@ -17,7 +18,7 @@
     legacyPackages = self.lib.compatibleVersionPackages pkgs;
 
     packages = {
-      example = pkgs.linkFarmFromDrvs "beam-overlay" (__attrValues pkgSet);
+      example = pkgs.linkFarmFromDrvs "beam-overlay" (builtins.attrValues pkgSet);
     };
   };
 }

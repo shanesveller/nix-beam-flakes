@@ -63,7 +63,8 @@
   mkPackageSet = {
     elixirVersion,
     erlangVersion,
-    languageServers ? false,
+    elixirLanguageServer ? false,
+    erlangLanguageServer ? false,
     pkgs,
   }: let
     erlang = mkErlang pkgs erlangVersion versions.erlang.${erlangVersion};
@@ -75,10 +76,16 @@
       inherit elixir;
     }
     // (
-      if languageServers
+      if elixirLanguageServer
+      then {
+        elixir_ls = beamPkgs.elixir_ls.override {inherit elixir;};
+      }
+      else {}
+    )
+    // (
+      if erlangLanguageServer
       then {
         inherit (beamPkgs) erlang-ls;
-        elixir_ls = beamPkgs.elixir_ls.override {inherit elixir;};
       }
       else {}
     );
