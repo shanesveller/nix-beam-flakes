@@ -1,4 +1,4 @@
-{...}: {
+_: {
   perSystem = {pkgs, ...}: {
     packages = {
       nix-prefetch-elixir = pkgs.writeShellScriptBin "nix-prefetch-elixir" ''

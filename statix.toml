@@ -1,6 +1,4 @@
-disabled = [
-  "empty_pattern",
-]
+disabled = [ ]
 nix_version = '2.9'
 ignore = ['.direnv']
 
