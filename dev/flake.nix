@@ -38,6 +38,8 @@
           shellHook = config.pre-commit.installationScript;
         };
 
+        formatter = pkgs.alejandra;
+
         packages.gcroot =
           pkgs.linkFarmFromDrvs "beam-overlay-dev"
           [config.devShells.default.inputDerivation];

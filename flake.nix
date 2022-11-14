@@ -14,5 +14,11 @@
     flake-parts.lib.mkFlake {inherit self;} {
       imports = [./parts/all-parts.nix];
       systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
+
+      flake = {
+        perSystem = {pkgs, ...}: {
+          formatter = pkgs.alejandra;
+        };
+      };
     };
 }
