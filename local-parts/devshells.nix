@@ -18,7 +18,7 @@
       };
   in {
     devShells.asdf = let
-      pkgSet = self.lib.packageSetFromToolVersions pkgs ../test/.tool-versions {
+      pkgSet = self.lib.packageSetFromToolVersions pkgs ../example/.tool-versions {
         elixirLanguageServer = true;
       };
     in

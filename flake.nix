@@ -12,7 +12,7 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit self;} {
-      imports = [./parts/all-parts.nix];
+      imports = [./parts/all-parts.nix ./local-parts];
       systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
 
       flake = {

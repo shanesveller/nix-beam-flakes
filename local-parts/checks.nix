@@ -1,6 +1,4 @@
 {self, ...}: {
-  imports = [./packages/livebook.nix ./packages/phx_new.nix];
-
   perSystem = {
     config,
     pkgs,
@@ -13,10 +11,8 @@
   in {
     checks.example = config.packages.example;
 
-    legacyPackages = self.lib.compatibleVersionPackages pkgs;
-
     packages = {
-      example = pkgs.linkFarmFromDrvs "beam-overlay" (builtins.attrValues pkgSet);
+      example = pkgs.linkFarmFromDrvs "example-pkg-set" (builtins.attrValues pkgSet);
     };
   };
 }
