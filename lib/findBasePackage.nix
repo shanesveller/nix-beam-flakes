@@ -1,4 +1,4 @@
-{lib}: let
+_: let
   inherit (builtins) elemAt splitVersion;
 in {
   elixirBasePackage = beamPkgs: version: let
@@ -6,15 +6,13 @@ in {
     major = elemAt split 0;
     minor = elemAt split 1;
   in
-    if beamPkgs ? "elixir_${major}_${minor}"
-    then beamPkgs."elixir_${major}_${minor}"
-    else null;
+    beamPkgs."elixir_${major}_${minor}"
+    or (throw "beam-flakes: Elixir version ${major}.${minor} has not been packaged in your nixpkgs input, but is needed");
 
   otpBasePackage = pkgs: version: let
     inherit (pkgs.beam) interpreters;
     major = elemAt (splitVersion version) 0;
   in
-    if interpreters ? "erlangR${major}"
-    then interpreters."erlangR${major}"
-    else null;
+    interpreters."erlangR${major}"
+    or (throw "beam-flakes: Erlang version ${major} has not been packaged in your nixpkgs input, but is needed");
 }

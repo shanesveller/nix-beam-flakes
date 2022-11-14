@@ -3,7 +3,6 @@
     beamPkgs = pkgs.beam.packages.erlangR24;
     buildMixArchive = {
       elixir,
-      erlang,
       hex,
       pname,
       rebar,
@@ -88,7 +87,7 @@
         wrapMixCommand {
           inherit elixir erlang hex pname subcommand;
           archive = buildMixArchive {
-            inherit elixir erlang hex pname rebar rebar3 version;
+            inherit elixir hex pname rebar rebar3 version;
             src = "${src}/installer";
           };
         };
@@ -106,7 +105,7 @@
         wrapMixCommand {
           inherit elixir erlang hex pname subcommand;
           archive = buildMixArchive {
-            inherit elixir erlang hex pname rebar rebar3 version;
+            inherit elixir hex pname rebar rebar3 version;
             src = "${src}/installer";
           };
         };

@@ -1,8 +1,4 @@
-{
-  self,
-  lib,
-  ...
-}: {
+{self, ...}: {
   imports = [./packages/phx_new.nix];
 
   perSystem = {
