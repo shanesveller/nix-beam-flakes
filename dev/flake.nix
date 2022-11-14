@@ -20,7 +20,7 @@
     flake-parts.lib.mkFlake {inherit self;} {
       systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
 
-      imports = [./checksums];
+      imports = [./checksums inputs.pre-commit.flakeModule];
 
       perSystem = {
         config,
@@ -29,35 +29,33 @@
         system,
         ...
       }: {
-        checks = {
-          pre-commit-check = inputs.pre-commit.lib.${system}.run {
-            src = ./..;
-            hooks = {
-              alejandra.enable = true;
-              nix-linter.enable = pkgs.stdenv.isLinux;
-              nixfmt.enable = false;
-              nixpkgs-fmt.enable = false;
-              prettier.enable = true;
-              statix.enable = pkgs.stdenv.isLinux;
-            };
-            settings = {
-              statix.ignore = [".direnv/*"];
-            };
-          };
-        };
-
         devShells.default = pkgs.mkShell {
           buildInputs =
             [pkgs.just]
             ++ (with inputs.pre-commit.packages.${system};
               [alejandra pre-commit]
               ++ lib.optionals pkgs.stdenv.isLinux [nix-linter statix]);
-          inherit (config.checks.pre-commit-check) shellHook;
+          shellHook = config.pre-commit.installationScript;
         };
 
         packages.gcroot =
           pkgs.linkFarmFromDrvs "beam-overlay-dev"
           [config.devShells.default.inputDerivation];
+
+        pre-commit = {
+          settings = {
+            hooks = {
+              alejandra.enable = true;
+              nix-linter.enable = pkgs.stdenv.isLinux;
+              prettier.enable = true;
+              statix.enable = pkgs.stdenv.isLinux;
+            };
+            rootSrc = lib.mkForce ./..;
+            settings = {
+              statix.ignore = [".direnv/*"];
+            };
+          };
+        };
       };
     };
 }
