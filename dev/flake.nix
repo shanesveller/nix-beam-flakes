@@ -34,7 +34,7 @@
             [pkgs.just]
             ++ (with inputs.pre-commit.packages.${system};
               [alejandra pre-commit]
-              ++ lib.optionals pkgs.stdenv.isLinux [nix-linter statix]);
+              ++ lib.optionals pkgs.stdenv.isLinux [statix]);
           shellHook = config.pre-commit.installationScript;
         };
 
@@ -46,7 +46,6 @@
           settings = {
             hooks = {
               alejandra.enable = true;
-              nix-linter.enable = pkgs.stdenv.isLinux;
               prettier.enable = true;
               statix.enable = pkgs.stdenv.isLinux;
             };
