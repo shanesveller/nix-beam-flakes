@@ -1,5 +1,5 @@
 {self, ...}: {
-  imports = [./packages/phx_new.nix];
+  imports = [./packages/livebook.nix ./packages/phx_new.nix];
 
   perSystem = {
     config,
