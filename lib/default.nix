@@ -117,6 +117,6 @@
   };
 in {
   inherit compatibleVersions compatibleVersionPackages versions;
-  inherit mkElixir mkErlang mkPackageSet;
+  inherit mkElixir mkErlang mkPackageSet normalizeElixir;
   inherit packageSetFromToolVersions parseToolVersions;
 }
