@@ -23,6 +23,10 @@ in {
       options.beamWorkspace = mkSubmoduleOptions {
         devShell = {
           enable = mkEnableOption "beam-flakes devshells" // {default = true;};
+          extraArgs = mkOption {
+            type = types.attrsOf types.anything;
+            default = {};
+          };
           extraPackages = mkOption {
             type = types.listOf types.package;
             default = [];
@@ -53,13 +57,14 @@ in {
         ++ lib.optional cfg.devShell.languageServers.erlang cfg.packages.erlang-ls;
 
       devShells = lib.mkIf (cfg.enable && cfg.devShell.enable) {
-        default = pkgs.mkShell {
-          packages = cfg.devShell.packages ++ cfg.devShell.extraPackages;
-          ERL_AFLAGS =
-            if cfg.devShell.iexShellHistory
-            then "-kernel shell_history enabled"
-            else null;
-        };
+        default = pkgs.mkShell ({
+            packages = cfg.devShell.packages ++ cfg.devShell.extraPackages;
+            ERL_AFLAGS =
+              if cfg.devShell.iexShellHistory
+              then "-kernel shell_history enabled"
+              else null;
+          }
+          // cfg.devShell.extraArgs);
       };
     };
   };
