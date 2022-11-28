@@ -2,7 +2,7 @@
   description = "My Elixir application";
 
   inputs = {
-    beam-flakes.url = "path:./..";
+    beam-flakes.url = "path:./../..";
     beam-flakes.inputs.flake-parts.follows = "flake-parts";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -19,17 +19,16 @@
 
       systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
 
-      perSystem = {pkgs, ...}: let
-        beamPkgs = beam-flakes.lib.packageSetFromToolVersions pkgs ./.tool-versions {
-          elixirLanguageServer = true;
-        };
-      in {
-        devShells.default = pkgs.mkShell {
-          packages = with beamPkgs; [elixir erlang elixir_ls];
-        };
-
-        packages = {
-          inherit (beamPkgs) erlang elixir elixir_ls;
+      perSystem = _: {
+        beamWorkspace = {
+          enable = true;
+          devShell.languageServers.elixir = true;
+          devShell.languageServers.erlang = false;
+          flakePackages = true;
+          versions = {
+            elixir = "1.14.2-otp-25";
+            erlang = "25.1.2";
+          };
         };
       };
     };
