@@ -23,6 +23,10 @@ in {
       options.beamWorkspace = mkSubmoduleOptions {
         devShell = {
           enable = mkEnableOption "beam-flakes devshells" // {default = true;};
+          extraPackages = mkOption {
+            type = types.listOf types.package;
+            default = [];
+          };
           iexShellHistory = mkEnableOption "IEx shell history" // {default = true;};
           packages = mkOption {
             type = types.listOf types.package;
@@ -50,7 +54,7 @@ in {
 
       devShells = lib.mkIf (cfg.enable && cfg.devShell.enable) {
         default = pkgs.mkShell {
-          inherit (cfg.devShell) packages;
+          packages = cfg.devShell.packages ++ cfg.devShell.extraPackages;
           ERL_AFLAGS =
             if cfg.devShell.iexShellHistory
             then "-kernel shell_history enabled"
