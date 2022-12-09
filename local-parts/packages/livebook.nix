@@ -17,9 +17,9 @@
         owner = "livebook-dev";
         repo = "livebook";
         rev = "v${version}";
-        sha256 = "sha256-iKD5u/8XCXBXNA588jXji9Kf7zRHGO5D89HsqErQnp0=";
+        sha256 = "sha256-0HsJGve4sLQ9cXpwwmMyo4R/wHaCwr22N32OX7O//oo=";
       };
-      version = "0.7.2";
+      version = "0.8.0";
     in {
       livebook = beamPkgs.mixRelease {
         buildInputs = [];
@@ -28,7 +28,7 @@
         mixFodDeps = beamPkgs.fetchMixDeps {
           inherit elixir src version;
           pname = "mix-deps-${pname}";
-          sha256 = "sha256-5EQk4RACPTZyOF+fSnUTSHuHt6exmXkBtIyXwVay6lk=";
+          sha256 = "sha256-tWJ4Rdv4TAY/6XI8cI7/GUfRXW34vrx2ZXlJYxDSGsU=";
         };
         inherit elixir hex pname src version;
 
