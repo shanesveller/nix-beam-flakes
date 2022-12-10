@@ -1,1 +1,1 @@
-{"version":1,"ops":[{"type":1,"author":{"id":"cbbb0dcbd846a8698f33d49174372d720e15067e"},"timestamp":1670685941,"title":"Publicize when ready","message":"- [ ] Nix Discourse\n- [ ] Elixir Discourse\n- [ ] Matrix\n- [ ] Flake-parts discussion thread","files":null}]}
+{"version":1,"ops":[{"type":4,"author":{"id":"cbbb0dcbd846a8698f33d49174372d720e15067e"},"timestamp":1670685953,"status":2},{"type":4,"author":{"id":"cbbb0dcbd846a8698f33d49174372d720e15067e"},"timestamp":1670685961,"status":1}]}
