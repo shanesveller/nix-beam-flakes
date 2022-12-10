@@ -13,6 +13,11 @@
       hex = beamPkgs.hex.override {inherit elixir;};
       pname = "livebook";
 
+      mixFodDeps = beamPkgs.fetchMixDeps {
+        inherit elixir src version;
+        pname = "mix-deps-${pname}";
+        sha256 = "sha256-tWJ4Rdv4TAY/6XI8cI7/GUfRXW34vrx2ZXlJYxDSGsU=";
+      };
       src = pkgs.fetchFromGitHub {
         owner = "livebook-dev";
         repo = "livebook";
@@ -25,12 +30,7 @@
         buildInputs = [];
         nativeBuildInputs = [pkgs.makeWrapper];
 
-        mixFodDeps = beamPkgs.fetchMixDeps {
-          inherit elixir src version;
-          pname = "mix-deps-${pname}";
-          sha256 = "sha256-tWJ4Rdv4TAY/6XI8cI7/GUfRXW34vrx2ZXlJYxDSGsU=";
-        };
-        inherit elixir hex pname src version;
+        inherit elixir hex mixFodDeps pname src version;
 
         installPhase = ''
           mix escript.build
@@ -40,6 +40,24 @@
 
           wrapProgram $out/bin/livebook \
             --prefix PATH : ${lib.makeBinPath [elixir erlang]} \
+            --set MIX_REBAR3 ${rebar3}/bin/rebar3
+        '';
+      };
+
+      livebook_bumblebee = beamPkgs.mixRelease {
+        buildInputs = [];
+        nativeBuildInputs = [pkgs.makeWrapper];
+
+        inherit elixir hex mixFodDeps pname src version;
+
+        installPhase = ''
+          mix escript.build
+
+          mkdir -p $out/bin
+          cp ./livebook $out/bin
+
+          wrapProgram $out/bin/livebook \
+            --prefix PATH : ${lib.makeBinPath [elixir erlang pkgs.stdenv]} \
             --set MIX_REBAR3 ${rebar3}/bin/rebar3
         '';
       };
