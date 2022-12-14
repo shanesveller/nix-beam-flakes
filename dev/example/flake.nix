@@ -27,7 +27,7 @@
           flakePackages = true;
           versions = {
             elixir = "1.14.2-otp-25";
-            erlang = "25.1.2";
+            erlang = "25.2";
           };
           # versions.fromToolVersions = ./.tool-versions;
         };
