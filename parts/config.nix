@@ -38,11 +38,6 @@ in {
             };
           };
 
-          pkgs = mkOption {
-            type = types.uniq (types.lazyAttrsOf (types.raw or types.unspecified));
-            default = pkgs;
-          };
-
           pkgSet = mkOption {
             type = types.uniq (types.lazyAttrsOf types.package);
           };
