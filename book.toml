@@ -1,0 +1,6 @@
+[book]
+authors = ["Shane Sveller"]
+language = "en"
+multilingual = false
+src = "docs"
+title = "Nix BEAM Flakes"
