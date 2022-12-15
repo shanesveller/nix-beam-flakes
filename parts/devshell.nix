@@ -30,9 +30,12 @@ in {
           extraPackages = mkOption {
             type = types.listOf types.package;
             default = [];
+            description = "Additional Nix packages to include in the generated devShell";
+            example = "pkgs.watchexec";
           };
           iexShellHistory = mkEnableOption "IEx shell history" // {default = true;};
           packages = mkOption {
+            internal = true;
             type = types.listOf types.package;
           };
         };
