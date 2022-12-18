@@ -8,13 +8,12 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = {
-    self,
+  outputs = inputs @ {
     beam-flakes,
     flake-parts,
     ...
   }:
-    flake-parts.lib.mkFlake {inherit self;} {
+    flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [beam-flakes.flakeModule];
 
       systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
