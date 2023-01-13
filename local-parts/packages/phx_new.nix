@@ -93,13 +93,13 @@
         };
 
       phx_new_unstable = let
-        version = "1.7.0-rc.1";
+        version = "1.7.0-rc.2";
         # https://github.com/phoenixframework/phoenix/commits/master/installer
         src = pkgs.fetchFromGitHub {
           owner = "phoenixframework";
           repo = "phoenix";
-          rev = "v1.7.0-rc.1";
-          sha256 = "sha256-y7V15k/5/4FXjjROk8SBpXR+JOrUCuWwbQpxrpY/aj0=";
+          rev = "v1.7.0-rc.2";
+          sha256 = "sha256-LQ6cIcjZWxLDsKYsA2+eXTiC/sE52ZUuHntLKt4PTeE=";
         };
       in
         wrapMixCommand {
