@@ -25,7 +25,7 @@
           devShell.languageServers.erlang = false;
           versions = {
             elixir = "1.14.3-otp-25";
-            erlang = "25.2.1";
+            erlang = "25.2.2";
           };
         };
       };
