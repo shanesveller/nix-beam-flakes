@@ -1,6 +1,6 @@
 {lib, ...}: {
   perSystem = {pkgs, ...}: let
-    beamPkgs = pkgs.beam.packages.erlangR24;
+    beamPkgs = pkgs.beam.packages.erlangR25;
     buildMixArchive = {
       elixir,
       hex,
