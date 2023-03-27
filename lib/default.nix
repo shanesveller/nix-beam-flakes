@@ -78,7 +78,7 @@
     // (
       if elixirLanguageServer
       then {
-        elixir_ls = beamPkgs.elixir_ls.override {inherit elixir;};
+        elixir-ls = beamPkgs.elixir-ls.override {inherit elixir;};
       }
       else {}
     )

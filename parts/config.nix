@@ -27,7 +27,7 @@ in {
             elixir = mkOption {
               type = types.nullOr types.package;
             };
-            elixir_ls = mkOption {
+            elixir-ls = mkOption {
               type = types.nullOr types.package;
             };
             erlang = mkOption {
@@ -76,7 +76,7 @@ in {
           inherit (cfg) pkgs;
         };
       in {
-        inherit (pkgset) elixir erlang elixir_ls erlang-ls;
+        inherit (pkgset) elixir erlang elixir-ls erlang-ls;
       });
     };
   };

@@ -8,7 +8,7 @@
       pkgs.mkShell {
         packages =
           (with pkgSet; [elixir erlang])
-          ++ lib.optional (pkgSet ? "elixir_ls") pkgSet.elixir_ls
+          ++ lib.optional (pkgSet ? "elixir-ls") pkgSet.elixir-ls
           ++ lib.optional (pkgSet ? "erlang-ls") pkgSet.erlang-ls;
 
         shellHook = ''

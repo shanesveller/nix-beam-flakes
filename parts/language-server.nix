@@ -42,7 +42,7 @@ in {
           cfg.packages.erlang-ls
         ])
         (mkIf cfg.devShell.languageServers.elixir [
-          cfg.packages.elixir_ls
+          cfg.packages.elixir-ls
         ])
       ];
     };

@@ -36,10 +36,10 @@ in {
         {
           inherit (cfg.packages) elixir erlang;
         }
-        (mkIf cfg.devShell.languageServers.elixir {
-          inherit (cfg.packages) elixir_ls;
-        })
         (mkIf cfg.devShell.languageServers.erlang {
+          inherit (cfg.packages) erlang-ls;
+        })
+        (mkIf cfg.devShell.languageServers.elixir {
           inherit (cfg.packages) elixir-ls;
         })
       ]);
