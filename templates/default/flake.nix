@@ -24,8 +24,8 @@
           devShell.languageServers.elixir = true;
           devShell.languageServers.erlang = false;
           versions = {
-            elixir = "1.14.5-otp-25";
-            erlang = "25.3.2";
+            elixir = "1.14.5-otp-26";
+            erlang = "26.0";
           };
         };
       };
