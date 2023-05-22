@@ -27,7 +27,7 @@
     devShells.example = let
       pkgSet = self.lib.mkPackageSet {
         inherit pkgs;
-        elixirVersion = "1.14.4";
+        elixirVersion = "1.14.5";
         erlangVersion = "25.3.2";
         elixirLanguageServer = true;
       };
