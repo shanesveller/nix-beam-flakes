@@ -49,7 +49,7 @@ in {
 
           versions = {
             elixir = mkOption {
-              type = types.nullOr (types.strMatching "^([0-9]+)\.([0-9]+)\.([0-9]+)(-otp-[0-9]+)?$");
+              type = types.nullOr (types.strMatching "^([0-9]+)\.([0-9]+)\.([0-9]+)(-rc\.[0-9]+)?(-otp-[0-9]+)?$");
             };
             erlang = mkOption {
               type = types.nullOr (types.strMatching "^([0-9]+)\.([0-9]+)(\.([0-9]+))?(\.([0-9+]))?$");
