@@ -29,12 +29,21 @@ in {
   };
 
   config = {
-    perSystem = {config, ...}: let
+    perSystem = {
+      config,
+      pkgs,
+      ...
+    }: let
       cfg = config.beamWorkspace;
     in {
       packages = mkIf cfg.flakePackages (mkMerge [
         {
           inherit (cfg.packages) elixir erlang;
+
+          elixir_1_15 = pkgs.beam.beamLib.callElixir ./elixir_1_15.nix {
+            inherit (cfg.packages) erlang;
+            debugInfo = true;
+          };
         }
         (mkIf cfg.devShell.languageServers.erlang {
           inherit (cfg.packages) erlang-ls;

@@ -5,6 +5,7 @@
     ./config.nix
     ./devshell.nix
     ./language-server.nix
+    ./overlays.nix
     ./packages.nix
     ./phoenix.nix
   ];

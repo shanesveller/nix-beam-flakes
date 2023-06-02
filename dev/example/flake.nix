@@ -18,18 +18,28 @@
 
       systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
 
-      perSystem = _: {
+      perSystem = {
+        pkgs,
+        system,
+        ...
+      }: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [beam-flakes.overlays.elixir_prerelease];
+        };
         beamWorkspace = {
           enable = true;
           devShell.languageServers.elixir = true;
           devShell.languageServers.erlang = false;
           flakePackages = true;
           versions = {
-            elixir = "1.14.5-otp-26";
+            elixir = "1.15.0-rc.1";
             erlang = "26.0";
           };
           # versions.fromToolVersions = ./.tool-versions;
         };
+
+        packages.elixir = builtins.trace (builtins.attrNames pkgs.beam.interpreters) pkgs.beamPackages.elixir_1_15;
       };
     };
 }
