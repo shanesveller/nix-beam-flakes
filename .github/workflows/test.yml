@@ -41,4 +41,11 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v2
         with:
           diagnostic-endpoint: ""
+      - uses: cachix/cachix-action@v12
+        if: github.ref == 'refs/heads/develop'
+        with:
+          name: shanesveller-nix-beam-flakes
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          pathsToPush: "./result"
+          skipAddingSubstituter: true
       - run: nix -L build .#all
