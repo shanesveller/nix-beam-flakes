@@ -25,4 +25,20 @@ jobs:
         with:
           diagnostic-endpoint: ""
       - run: nix -L flake check ./dev
-      - run: nix -L flake check
+
+  packages:
+    name: Build Packages
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v4
+        with:
+          diagnostic-endpoint: ""
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+        with:
+          diagnostic-endpoint: ""
+      - run: nix -L build .#all
