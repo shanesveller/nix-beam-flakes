@@ -26,7 +26,7 @@
           devShell.phoenix = true;
           versions = {
             elixir = "1.14.5-otp-26";
-            erlang = "26.0";
+            erlang = "26.0.2";
           };
         };
       };
