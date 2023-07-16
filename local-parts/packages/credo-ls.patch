@@ -1,0 +1,27 @@
+diff --git a/lib/credo_language_server/cli.ex b/lib/credo_language_server/cli.ex
+new file mode 100644
+index 0000000..782ff94
+--- /dev/null
++++ b/lib/credo_language_server/cli.ex
+@@ -0,0 +1,9 @@
++defmodule CredoLanguageServer.CLI do
++  def main(_argv) do
++    Logger.configure(level: :info)
++
++    Application.ensure_all_started(:credo_language_server)
++
++    :timer.sleep(:infinity)
++  end
++end
+diff --git a/mix.exs b/mix.exs
+index f127b0f..d6942a4 100644
+--- a/mix.exs
++++ b/mix.exs
+@@ -7,6 +7,7 @@ defmodule CredoLanguageServer.MixProject do
+       description: "LSP implementation for Credo",
+       version: "0.2.0",
+       elixir: "~> 1.10",
++      escript: [main_module: CredoLanguageServer.CLI],
+       start_permanent: Mix.env() == :prod,
+       elixirc_paths: elixirc_paths(Mix.env()),
+       package: package(),

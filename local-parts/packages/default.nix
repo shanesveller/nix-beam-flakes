@@ -1,5 +1,5 @@
 _: {
-  imports = [./livebook.nix ./phx_new.nix];
+  imports = [./credo-ls.nix ./livebook.nix ./phx_new.nix];
 
   perSystem = {
     config,
@@ -8,6 +8,6 @@ _: {
   }: {
     packages.all =
       pkgs.linkFarmFromDrvs "nix-beam-flakes-packages"
-      (with config.packages; [livebook phx_new]);
+      (with config.packages; [credo-language-server livebook phx_new]);
   };
 }
