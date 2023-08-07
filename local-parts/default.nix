@@ -1,3 +1,3 @@
 _: {
-  imports = [./checks.nix ./devshells.nix ./packages];
+  imports = [./cache.nix ./checks.nix ./devshells.nix ./packages];
 }

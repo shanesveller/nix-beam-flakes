@@ -11,27 +11,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  packages:
-    name: Cache OTP Derivations
-    strategy:
-      # Match support range of latest Elixir
-      # https://hexdocs.pm/elixir/compatibility-and-deprecations.html#compatibility-between-elixir-and-erlang-otp
-      matrix:
-        elixir:
-          - "1.13.4"
-          - "1.14.5"
-          - "1.15.4"
-        # TODO: Enable MacOS when ARM chips are available
-        os: [ubuntu-latest]
-        otp:
-          - "24.3.4.13"
-          - "25.3.2.5"
-          - "26.0.2"
-        exclude:
-          - elixir: "1.13.4"
-            otp: "26.0.2"
+  # idea credit: https://github.com/nix-community/nix-github-actions/blob/bfeb681177b5128d061ebbef7ded30bc21a3f135/.github/workflows/detsys-nix-installer-action.yml
+  matrix:
+    name: Calculate recent-versions matrix
+    runs-on: ubuntu-latest
+    outputs:
+      calculated: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v4
+        with:
+          diagnostic-endpoint: ""
+      - name: Set Matrix
+        id: set-matrix
+        run: |
+          set -eux -o pipefail
+          echo "matrix=$(nix eval --json '.#lib.recentMatrix')" >> "$GITHUB_OUTPUT"
 
+  packages:
+    name: Cache ${{ matrix.elixir }} on OTP ${{ matrix.erlang }}
+    needs: matrix
     runs-on: ${{ matrix.os }}
+    strategy:
+      matrix: ${{ fromJSON(needs.matrix.outputs.calculated) }}
     steps:
       - uses: actions/checkout@v3
       - name: Install Nix
@@ -52,6 +55,6 @@ jobs:
           printf \
             "elixir %s\nerlang %s" \
               ${{ matrix.elixir }} \
-              ${{ matrix.otp }} \
+              ${{ matrix.erlang }} \
             | tee ./dev/example/.tool-versions
       - run: nix -L build .#example

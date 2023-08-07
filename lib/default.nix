@@ -113,6 +113,20 @@
 
   parseToolVersions = import ./parseToolVersions.nix {inherit lib;};
 
+  inherit (latestVersions) recentElixirs recentErlangs;
+
+  # idea credit: https://github.com/nix-community/nix-github-actions/blob/bfeb681177b5128d061ebbef7ded30bc21a3f135/default.nix
+  recentMatrix =
+    pipe {
+      elixir = recentElixirs;
+      erlang = recentErlangs;
+      os = ["ubuntu-latest"];
+    } [
+      lib.attrsets.cartesianProductOfSets
+      (builtins.filter (set: versionCompatible set.elixir set.erlang))
+      (v: {include = v;})
+    ];
+
   versionCompatible =
     import ./versionCompatible.nix {inherit lib normalizeElixir;};
 
@@ -121,8 +135,9 @@
     erlang = importJSON ../data/erlang.json;
   };
 in {
-  inherit compatibleVersions compatibleVersionPackages versions;
+  inherit compatibleVersions compatibleVersionPackages versions versionCompatible;
   inherit mkElixir mkErlang mkPackageSet normalizeElixir;
   inherit packageSetFromToolVersions parseToolVersions;
   inherit (latestVersions) latestElixirMinors latestErlangMajors recentElixirs recentErlangs;
+  inherit recentMatrix;
 }
