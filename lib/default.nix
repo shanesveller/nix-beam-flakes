@@ -46,6 +46,8 @@
 
   findBasePackage = import ./findBasePackage.nix {inherit lib;};
 
+  latestVersions = import ./latestVersions.nix {inherit lib versions;};
+
   mkElixir = beamPkgs: version: sha256: let
     basePkg = elixirBasePackage beamPkgs version;
   in
@@ -122,4 +124,5 @@ in {
   inherit compatibleVersions compatibleVersionPackages versions;
   inherit mkElixir mkErlang mkPackageSet normalizeElixir;
   inherit packageSetFromToolVersions parseToolVersions;
+  inherit (latestVersions) latestElixirMinors latestErlangMajors recentElixirs recentErlangs;
 }
