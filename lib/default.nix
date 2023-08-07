@@ -90,11 +90,14 @@
       else {}
     );
 
-  normalizeElixir = version: let
-    split = splitVersion version;
-    truncated = take 3 split;
-  in
-    concatStringsSep "." (map toString truncated);
+  normalizeElixir = version:
+    lib.trivial.pipe version [
+      (lib.versions.pad 3)
+      splitVersion
+      (take 3)
+      (map toString)
+      (concatStringsSep ".")
+    ];
 
   packageSetFromToolVersions = pkgs: toolVersionsPath: args: let
     asdfVersions = parseToolVersions toolVersionsPath;
