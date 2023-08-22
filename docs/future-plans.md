@@ -2,10 +2,10 @@
 
 Immediate concerns:
 
-- Significant documentation efforts inspired by the `flake-parts` website
-- CI that the modules continue to evaluate successfully with common scenarios
-- A binary cache for the latest pairing of Erlang/Elixir for MacOS/Linux
-- More robust specialty support for Phoenix projects
+- [ ] Significant documentation efforts inspired by the `flake-parts` website
+- [x] CI that the modules continue to evaluate successfully with common scenarios
+- [x] A binary cache for the latest pairing of Erlang/Elixir for MacOS/Linux
+- [ ] More robust specialty support for Phoenix projects
 
 Later on:
 

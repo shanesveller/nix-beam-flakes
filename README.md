@@ -52,10 +52,7 @@ Want to start a new Phoenix project? Don't have a global install of Elixir/Mix?
 This can help. Pairs well with flake templates below.
 
 ```shell
-# Stable
 nix run github:shanesveller/nix-beam-flakes#phx_new -- --help
-# 1.7 RC
-nix run github:shanesveller/nix-beam-flakes#phx_new_unstable -- --help
 ```
 
 #### livebook
@@ -112,8 +109,8 @@ A complete example:
           enable = true;
           devShell.languageServers.elixir = true;
           versions = {
-            elixir = "1.14.2";
-            erlang = "25.1.2";
+            elixir = "1.15.4";
+            erlang = "26.0.2";
           };
         };
       };
@@ -141,8 +138,8 @@ setting `perSystem.beamWorkspace.devShell.enable = false;`
             #
             # Everything after the first hyphen is stripped and handled according
             # to the defined erlang version instead.
-            elixir = "1.14.2";
-            erlang = "25.1.2";
+            elixir = "1.15.4";
+            erlang = "26.0.2";
           };
         };
       };
@@ -173,10 +170,10 @@ For projects that formerly, or concurrently, use
 
 Immediate concerns:
 
-- Significant documentation efforts inspired by the `flake-parts` website
-- CI that the modules continue to evaluate successfully with common scenarios
-- A binary cache for the latest pairing of Erlang/Elixir for MacOS/Linux
-- More robust specialty support for Phoenix projects
+- [ ] Significant documentation efforts inspired by the `flake-parts` website
+- [x] CI that the modules continue to evaluate successfully with common scenarios
+- [x] A binary cache for the latest pairing of Erlang/Elixir for MacOS/Linux
+- [ ] More robust specialty support for Phoenix projects
 
 Later on:
 
@@ -209,8 +206,8 @@ If you are a Nix user, this is already automated:
 
 ```shell
 nix develop ./dev
-just add-elixir 1.14.2
-just add-erlang 25.1.2
+just add-elixir 1.15.4
+just add-erlang 26.0.2
 ```
 
 Just PR the changes to `data` that it committed for you. I'll probably be on top

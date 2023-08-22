@@ -8,8 +8,6 @@ This can help. Pairs well with flake templates below.
 ```shell
 # Stable
 nix run github:shanesveller/nix-beam-flakes#phx_new -- --help
-# 1.7 RC
-nix run github:shanesveller/nix-beam-flakes#phx_new_unstable -- --help
 ```
 
 ## livebook
