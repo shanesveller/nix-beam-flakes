@@ -73,16 +73,20 @@ in {
   };
 
   config = {
-    perSystem = {config, ...}: let
+    perSystem = {
+      config,
+      pkgs,
+      ...
+    }: let
       cfg = config.beamWorkspace;
     in {
       beamWorkspace.packages = mkIf (cfg.versions.elixir != null && cfg.versions.erlang != null) (let
         pkgset = beam-flakes-lib.mkPackageSet {
+          inherit pkgs;
           elixirVersion = beam-flakes-lib.normalizeElixir cfg.versions.elixir;
           erlangVersion = cfg.versions.erlang;
           elixirLanguageServer = true;
           erlangLanguageServer = true;
-          inherit (cfg) pkgs;
         };
       in {
         inherit (pkgset) elixir erlang elixir-ls erlang-ls;
