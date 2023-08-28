@@ -109,7 +109,7 @@ A complete example:
           enable = true;
           devShell.languageServers.elixir = true;
           versions = {
-            elixir = "1.15.4";
+            elixir = "1.15.5";
             erlang = "26.0.2";
           };
         };
@@ -138,7 +138,7 @@ setting `perSystem.beamWorkspace.devShell.enable = false;`
             #
             # Everything after the first hyphen is stripped and handled according
             # to the defined erlang version instead.
-            elixir = "1.15.4";
+            elixir = "1.15.5";
             erlang = "26.0.2";
           };
         };
@@ -206,7 +206,7 @@ If you are a Nix user, this is already automated:
 
 ```shell
 nix develop ./dev
-just add-elixir 1.15.4
+just add-elixir 1.15.5
 just add-erlang 26.0.2
 ```
 
