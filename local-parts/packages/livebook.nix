@@ -4,12 +4,12 @@
     pkgs,
     ...
   }: let
-    beamPkgs = pkgs.beam.packages.erlangR25;
+    beamPkgs = pkgs.beam.packages.erlangR26;
     # inherit (pkgs.callPackage ./lib.nix {inherit lib;}) buildEscript;
   in {
     packages = let
       inherit (beamPkgs) erlang rebar3;
-      elixir = beamPkgs.elixir_1_14;
+      elixir = beamPkgs.elixir_1_15;
       hex = beamPkgs.hex.override {inherit elixir;};
       pname = "livebook";
 
