@@ -25,7 +25,7 @@
           devShell.languageServers.erlang = false;
           flakePackages = true;
           versions = {
-            elixir = "1.14.5-otp-26";
+            elixir = "1.15.6-otp-26";
             erlang = "26.1";
           };
           # versions.fromToolVersions = ./.tool-versions;
