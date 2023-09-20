@@ -58,7 +58,7 @@
           cp ./livebook $out/bin
 
           wrapProgram $out/bin/livebook \
-            --prefix PATH : ${lib.makeBinPath [elixir erlang pkgs.stdenv]} \
+            --prefix PATH : ${lib.makeBinPath ([elixir erlang] ++ (with pkgs; [cmake gcc gnumake]))} \
             --set MIX_REBAR3 ${rebar3}/bin/rebar3
         '';
       };
