@@ -108,7 +108,7 @@ This approach is mutually exclusive with the syntax [described above](#explicitl
 ```
 # .toolversions
 elixir 1.15.5
-erlang 26.0.2
+erlang 26.1
 ```
 
 ```nix

@@ -26,7 +26,7 @@
           devShell.phoenix = true;
           versions = {
             elixir = "1.15.2";
-            erlang = "26.0.2";
+            erlang = "26.1";
           };
         };
       };

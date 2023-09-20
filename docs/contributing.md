@@ -10,7 +10,7 @@ If you are a Nix user, this is already automated:
 ```shell
 nix develop ./dev
 just add-elixir 1.15.5
-just add-erlang 26.0.2
+just add-erlang 26.1
 ```
 
 Just PR the changes to `data` that it committed for you. I'll probably be on top
