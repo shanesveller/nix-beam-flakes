@@ -14,7 +14,7 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@v4
         with:
           diagnostic-endpoint: ""
-      - uses: DeterminateSystems/flakehub-push@1b4b882ecad1351b8e6d7f607ebc0c2253d0ef44
+      - uses: DeterminateSystems/flakehub-push@e4c22e32ba38129ed41c08f7d0f6a78887ce4320
         with:
           visibility: "public"
           rolling: true
