@@ -69,7 +69,7 @@
   in {
     packages = let
       inherit (beamPkgs) erlang rebar rebar3;
-      elixir = beamPkgs.elixir_1_14;
+      elixir = beamPkgs.elixir_1_15;
       hex = beamPkgs.hex.override {inherit elixir;};
       pname = "phx_new";
       subcommand = "phx.new";
