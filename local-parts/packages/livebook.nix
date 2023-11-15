@@ -22,10 +22,10 @@
         owner = "livebook-dev";
         repo = "livebook";
         rev = "v${version}";
-        sha256 = "sha256-zUJM6OcXhHW8e09h2EKnfI9voF2k4AZ75ulQErNqjD0=";
+        sha256 = "sha256-ZY0p6FmyKHkPIe1+eNbCOnIunICno9COrv649GBZiiI=";
       };
       # https://github.com/livebook-dev/livebook/releases
-      version = "0.11.3";
+      version = "0.11.4";
     in {
       livebook = beamPkgs.mixRelease {
         buildInputs = [];
