@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v6
+        uses: DeterminateSystems/nix-installer-action@v8
         with:
           diagnostic-endpoint: ""
       - uses: DeterminateSystems/flakehub-push@3e2974a98fe19e78aaa766e5f61c945992fb887f
