@@ -418,10 +418,10 @@ var hljs = (function () {
       "string" == typeof e
         ? r(n, e.split(" "))
         : Array.isArray(e)
-        ? r(n, e)
-        : Object.keys(e).forEach((n) => {
-            Object.assign(i, $(e[n], t, n));
-          }),
+          ? r(n, e)
+          : Object.keys(e).forEach((n) => {
+              Object.assign(i, $(e[n], t, n));
+            }),
       i
     );
     function r(e, n) {
@@ -636,12 +636,12 @@ var hljs = (function () {
                 e.cachedVariants
                   ? e.cachedVariants
                   : q(e)
-                  ? r(e, {
-                      starts: e.starts ? r(e.starts) : null,
-                    })
-                  : Object.isFrozen(e)
-                  ? r(e)
-                  : e
+                    ? r(e, {
+                        starts: e.starts ? r(e.starts) : null,
+                      })
+                    : Object.isFrozen(e)
+                      ? r(e)
+                      : e
               ))("self" === e ? s : e),
             ),
           )),
@@ -830,12 +830,12 @@ var hljs = (function () {
         N.endScope && N.endScope._wrap
           ? (d(), M.addKeyword(n, N.endScope._wrap))
           : N.endScope && N.endScope._multi
-          ? (d(), u(N.endScope, e))
-          : s.skip
-          ? (S += n)
-          : (s.returnEnd || s.excludeEnd || (S += n),
-            d(),
-            s.excludeEnd && (S = n));
+            ? (d(), u(N.endScope, e))
+            : s.skip
+              ? (S += n)
+              : (s.returnEnd || s.excludeEnd || (S += n),
+                d(),
+                s.excludeEnd && (S = n));
         do {
           N.scope && M.closeNode(),
             N.skip || N.subLanguage || (R += N.relevance),
