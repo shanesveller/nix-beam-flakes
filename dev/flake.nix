@@ -45,6 +45,7 @@
             hooks = {
               alejandra.enable = true;
               prettier.enable = true;
+              prettier.excludes = ["flake.lock"];
               statix.enable = pkgs.stdenv.isLinux;
             };
             rootSrc = lib.mkForce ./..;
