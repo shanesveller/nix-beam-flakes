@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   beam-flakes-lib,
   flake-parts-lib,
@@ -31,11 +30,7 @@ in {
   };
 
   config = {
-    perSystem = {
-      config,
-      pkgs,
-      ...
-    }: let
+    perSystem = {config, ...}: let
       cfg = config.beamWorkspace;
       toolVersions =
         if (cfg.versions.fromToolVersions != null)

@@ -27,13 +27,7 @@ in {
   };
 
   config = {
-    perSystem = {
-      config,
-      pkgs,
-      ...
-    }: let
-      cfg = config.beamWorkspace.devShell;
-    in {
+    perSystem = {pkgs, ...}: {
       beamWorkspace.devShell.packages = mkMerge [
         (mkIf pkgs.stdenv.isDarwin (with pkgs.darwin.apple_sdk.frameworks; [CoreServices]))
         (mkIf pkgs.stdenv.isLinux [pkgs.inotify-tools])

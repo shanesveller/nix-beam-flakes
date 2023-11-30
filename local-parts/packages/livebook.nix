@@ -1,11 +1,6 @@
 {lib, ...}: {
-  perSystem = {
-    config,
-    pkgs,
-    ...
-  }: let
+  perSystem = {pkgs, ...}: let
     beamPkgs = pkgs.beam.packages.erlangR26;
-    # inherit (pkgs.callPackage ./lib.nix {inherit lib;}) buildEscript;
   in {
     packages = let
       inherit (beamPkgs) erlang rebar3;

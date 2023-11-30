@@ -17,7 +17,7 @@
     ;
 in {
   options = {
-    perSystem = mkPerSystemOption ({pkgs, ...}: {
+    perSystem = mkPerSystemOption (_: {
       _file = ./config.nix;
 
       options = {
