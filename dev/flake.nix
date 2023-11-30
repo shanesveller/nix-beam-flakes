@@ -44,6 +44,7 @@
           settings = {
             hooks = {
               alejandra.enable = true;
+              deadnix.enable = true;
               prettier.enable = true;
               prettier.excludes = ["flake.lock"];
               statix.enable = pkgs.stdenv.isLinux;
