@@ -16,5 +16,13 @@ list-all-erlang:
     nix run ./dev#list-all-otp
 show:
     nix flake show
+
+target_ref := `nix flake metadata --json github:shanesveller/nix-flake-lock-targets | jq -r '.locks.nodes.unstable.locked.rev'`
+update_args := "--commit-lock-file --override-input nixpkgs github:nixos/nixpkgs/" + target_ref
+update: update-inputs
+update-inputs:
+  nix flake update {{ update_args }} .
+  nix flake update {{ update_args }} ./dev
+
 watch-docs:
   nix develop .#docs --command mdbook serve --open
