@@ -5,8 +5,8 @@ add-elixir version:
 add-erlang version:
     nix run ./dev#add-otp-version {{ version }}
 check:
-    nix flake check
-    nix flake check ./dev
+    nix flake check --all-systems
+    nix flake check ./dev --all-systems
 doc:
   nix build .#optionsDoc
   cat ./result > docs/options.md
