@@ -24,7 +24,8 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@v2
         with:
           diagnostic-endpoint: ""
-      - run: nix -L flake check ./dev
+      - run: nix -L flake check --all-systems
+      - run: nix -L flake check ./dev --all-systems
 
   packages:
     name: Build Packages
