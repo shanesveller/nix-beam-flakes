@@ -30,7 +30,7 @@
             phoenix = true;
           };
           versions = {
-            elixir = "1.15.7";
+            elixir = "1.16.0";
             erlang = "26.2";
           };
         };
