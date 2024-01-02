@@ -80,7 +80,17 @@
     // (
       if elixirLanguageServer
       then {
-        elixir-ls = beamPkgs.elixir-ls.override {inherit elixir;};
+        elixir-ls = (beamPkgs.elixir-ls.override {inherit elixir;}).overrideAttrs (old: {
+          buildPhase =
+            # Elixir 1.16.0 or newer
+            if ((builtins.compareVersions elixir.version "1.16.0") != -1)
+            then ''
+              runHook preBuild
+              mix do compile --no-deps-check, elixir_ls.release2
+              runHook postBuild
+            ''
+            else old.buildPhase;
+        });
       }
       else {}
     )
