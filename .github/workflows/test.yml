@@ -42,7 +42,7 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v2
         with:
           diagnostic-endpoint: ""
-      - uses: cachix/cachix-action@v13
+      - uses: cachix/cachix-action@v14
         if: github.ref == 'refs/heads/develop'
         with:
           name: shanesveller-nix-beam-flakes
