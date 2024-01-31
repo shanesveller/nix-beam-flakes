@@ -137,7 +137,7 @@
     pipe {
       elixir = recentElixirs;
       erlang = recentErlangs;
-      os = ["ubuntu-latest"];
+      os = ["macos-14" "ubuntu-latest"];
     } [
       lib.attrsets.cartesianProductOfSets
       (builtins.filter (set: versionCompatible set.elixir set.erlang))

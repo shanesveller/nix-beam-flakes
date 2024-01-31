@@ -30,7 +30,7 @@ jobs:
           echo "matrix=$(nix eval --json '.#lib.recentMatrix')" >> "$GITHUB_OUTPUT"
 
   packages:
-    name: Cache ${{ matrix.elixir }} on OTP ${{ matrix.erlang }}
+    name: Cache ${{ matrix.elixir }} on OTP ${{ matrix.erlang }} (${{ matrix.os }})
     needs: matrix
     runs-on: ${{ matrix.os }}
     strategy:
