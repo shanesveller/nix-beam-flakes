@@ -118,7 +118,7 @@ flake-parts.lib.mkFlake {inherit inputs;} {
     beamWorkspace = {
       enable = true;
       versions = {
-        fromToolVersioons = ./.tool-versions;
+        fromToolVersions = ./.tool-versions;
       };
     };
   };
