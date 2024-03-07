@@ -11,16 +11,16 @@
       mixFodDeps = beamPkgs.fetchMixDeps {
         inherit elixir src version;
         pname = "mix-deps-${pname}";
-        sha256 = "sha256-3S9vcRuSRrV+Ucna9aKI0u5AXQLay1rmlBBmMRUp/4o=";
+        sha256 = "sha256-x/VvXB2rJ03c3tWZRXnD3gbTT494P8GVD0sYEHcTp3o=";
       };
       src = pkgs.fetchFromGitHub {
         owner = "livebook-dev";
         repo = "livebook";
         rev = "v${version}";
-        sha256 = "sha256-ZY0p6FmyKHkPIe1+eNbCOnIunICno9COrv649GBZiiI=";
+        sha256 = "sha256-Q4c0AelZZDPxE/rtoHIRQi3INMLHeiZ72TWgy183f4Q=";
       };
       # https://github.com/livebook-dev/livebook/releases
-      version = "0.11.4";
+      version = "0.12.1";
     in {
       livebook = beamPkgs.mixRelease {
         buildInputs = [];
