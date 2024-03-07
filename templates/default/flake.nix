@@ -30,7 +30,7 @@
           };
           versions = {
             elixir = "1.16.1";
-            erlang = "26.2.1";
+            erlang = "26.2.3";
           };
         };
       };
