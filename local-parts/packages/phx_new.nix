@@ -49,10 +49,12 @@
       erlang,
       git ? pkgs.gitMinimal,
       hex,
+      meta ? {},
       pname,
       subcommand,
     }:
       pkgs.writeShellApplication {
+        inherit meta;
         name = pname;
         runtimeInputs = [erlang elixir git hex];
         text = ''
@@ -92,6 +94,8 @@
             inherit elixir hex pname rebar rebar3 version;
             src = "${src}/installer";
           };
+
+          meta.mainProgram = "phx_new";
         };
     };
   };

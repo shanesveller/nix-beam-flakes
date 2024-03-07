@@ -40,6 +40,8 @@
             --prefix PATH : ${lib.makeBinPath [elixir erlang]} \
             --set MIX_REBAR3 ${rebar3}/bin/rebar3
         '';
+
+        meta.mainProgram = "livebook";
       };
 
       livebook_bumblebee = beamPkgs.mixRelease {
@@ -58,6 +60,8 @@
             --prefix PATH : ${lib.makeBinPath ([elixir erlang] ++ (with pkgs; [cmake gcc gnumake]))} \
             --set MIX_REBAR3 ${rebar3}/bin/rebar3
         '';
+
+        meta.mainProgram = "livebook";
       };
     };
   };
