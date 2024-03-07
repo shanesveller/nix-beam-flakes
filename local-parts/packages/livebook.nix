@@ -1,5 +1,9 @@
 {lib, ...}: {
-  perSystem = {pkgs, ...}: let
+  perSystem = {
+    config,
+    pkgs,
+    ...
+  }: let
     beamPkgs = pkgs.beam.packages.erlangR26.extend (_final: prev: {
       rebar3 = prev.rebar3.overrideAttrs (_old: {doCheck = false;});
     });
@@ -44,21 +48,13 @@
         meta.mainProgram = "livebook";
       };
 
-      livebook_bumblebee = beamPkgs.mixRelease {
-        buildInputs = [];
-        nativeBuildInputs = [pkgs.makeWrapper];
-
-        inherit elixir hex mixFodDeps pname src version;
-
-        installPhase = ''
-          mix escript.build
-
-          mkdir -p $out/bin
-          cp ./livebook $out/bin
-
+      livebook_bumblebee = pkgs.symlinkJoin {
+        name = "livebook-with-gcc";
+        paths = with pkgs; [cmake gcc gnumake config.packages.livebook];
+        buildInputs = [pkgs.makeWrapper];
+        postBuild = ''
           wrapProgram $out/bin/livebook \
-            --prefix PATH : ${lib.makeBinPath ([elixir erlang] ++ (with pkgs; [cmake gcc gnumake]))} \
-            --set MIX_REBAR3 ${rebar3}/bin/rebar3
+            --prefix PATH : ${lib.makeBinPath (with pkgs; [cmake gcc gnumake])}
         '';
 
         meta.mainProgram = "livebook";
