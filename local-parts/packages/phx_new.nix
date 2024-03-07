@@ -75,13 +75,13 @@
       subcommand = "phx.new";
     in {
       phx_new = let
-        version = "1.7.10";
+        version = "1.7.11";
         # https://github.com/phoenixframework/phoenix/tags
         src = pkgs.fetchFromGitHub {
           owner = "phoenixframework";
           repo = "phoenix";
           rev = "v${version}";
-          sha256 = "sha256-91JNiO7/2FDgqt8F9p1XGC3UcpDkD+a/L709A65pmkU=";
+          sha256 = "sha256-WFUfwny0qYg9xqkW/nUSbNTJ3IAp1a+jzwUi5iQCS8E=";
         };
       in
         wrapMixCommand {
