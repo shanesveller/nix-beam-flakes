@@ -67,6 +67,8 @@
     erlangVersion,
     elixirLanguageServer ? false,
     erlangLanguageServer ? false,
+    # Upstream Rebar project is presumed to have done its own CI diligence WRT Erlang versions
+    rebarCheck ? false,
     pkgs,
   }: let
     erlang = mkErlang pkgs erlangVersion versions.erlang.${erlangVersion};
@@ -100,6 +102,11 @@
         inherit (beamPkgs) erlang-ls;
       }
       else {}
+    )
+    // (
+      if rebarCheck
+      then {}
+      else lib.genAttrs ["rebar" "rebar3"] (p: beamPkgs.${p}.overrideAttrs (_old: {doCheck = false;}))
     );
 
   normalizeElixir = version:
