@@ -48,7 +48,7 @@
       cp -r ${self}/docs $TMP/docs
       chmod u+w $TMP/docs
       ln -s ${optionsDoc.optionsCommonMark} $TMP/docs/options.md
-      ${lib.getExe pkgs.mdbook} build -d $out $TMP/
+      ${lib.getExe' pkgs.mdbook "mdbook"} build -d $out $TMP/
     '';
 
     packages.optionsDoc = optionsDoc.optionsCommonMark;
