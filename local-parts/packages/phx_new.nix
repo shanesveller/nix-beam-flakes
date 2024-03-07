@@ -23,8 +23,8 @@
         HEX_OFFLINE = 1;
         MIX_DEBUG = DEBUG;
         inherit MIX_ENV;
-        MIX_REBAR = lib.getExe rebar;
-        MIX_REBAR3 = lib.getExe rebar3;
+        MIX_REBAR = lib.getExe' rebar "rebar";
+        MIX_REBAR3 = lib.getExe' rebar3 "rebar3";
 
         phases = ["unpackPhase" "buildPhase" "installPhase"];
 
