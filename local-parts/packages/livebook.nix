@@ -48,17 +48,38 @@
         meta.mainProgram = "livebook";
       };
 
-      livebook_bumblebee = pkgs.symlinkJoin {
-        name = "livebook-with-gcc";
-        paths = with pkgs; [cmake gcc gnumake config.packages.livebook];
-        buildInputs = [pkgs.makeWrapper];
-        postBuild = ''
-          wrapProgram $out/bin/livebook \
-            --prefix PATH : ${lib.makeBinPath (with pkgs; [cmake gcc gnumake])}
-        '';
+      livebook_bumblebee = let
+        # NOTE: MacOS EXLA build process apparently ignores the Nix-provided GCC
+        #       for `clang++` from PATH
+        compiler =
+          if pkgs.stdenv.isLinux
+          then pkgs.gcc
+          else pkgs.clang;
+        inherit (pkgs.darwin.apple_sdk) frameworks;
+        # NOTE: Can't use lib.optionalString in tail position due to eval errors on Linux
+        frameworkFlags =
+          if pkgs.stdenv.isDarwin
+          then
+            lib.trivial.pipe [frameworks.Foundation]
+            [
+              (builtins.map (p: "-F${p}/Library/Frameworks"))
+              (builtins.concatStringsSep " ")
+              lib.escapeShellArg
+            ]
+          else "";
+      in
+        pkgs.symlinkJoin {
+          name = "livebook-with-bumblee-compiler";
+          paths = [config.packages.livebook];
+          buildInputs = [pkgs.makeWrapper];
+          postBuild = ''
+            wrapProgram $out/bin/livebook \
+              --prefix NIX_LDFLAGS ' ' ${frameworkFlags} \
+              --prefix PATH : ${lib.makeBinPath (with pkgs; [cmake compiler gnumake])}
+          '';
 
-        meta.mainProgram = "livebook";
-      };
+          meta.mainProgram = "livebook";
+        };
     };
   };
 }

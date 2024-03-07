@@ -1,0 +1,23 @@
+# EXLA Compiler test
+
+```elixir
+Mix.install(
+  [
+    {:exla, "~> 0.7.1"},
+    {:nx, "~> 0.7.1"}
+  ],
+  config: [nx: [default_backend: EXLA.Backend]]
+)
+```
+
+## Section
+
+```elixir
+defmodule NxExlaTest do
+  import Nx.Defn
+
+  defn(softmax(t), do: Nx.exp(t) / Nx.sum(Nx.exp(t)))
+end
+
+Nx.Defn.jit_apply(&NxExlaTest.softmax/1, [Nx.tensor([1, 2, 3])], compiler: EXLA)
+```
