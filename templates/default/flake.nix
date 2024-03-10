@@ -29,7 +29,7 @@
             languageServers.erlang = false;
           };
           versions = {
-            elixir = "1.16.1";
+            elixir = "1.16.2";
             erlang = "26.2.3";
           };
         };

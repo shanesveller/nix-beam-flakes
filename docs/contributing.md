@@ -9,7 +9,7 @@ If you are a Nix user, this is already automated:
 
 ```shell
 nix develop ./dev
-just add-elixir 1.16.1
+just add-elixir 1.16.2
 just add-erlang 26.2.3
 ```
 
