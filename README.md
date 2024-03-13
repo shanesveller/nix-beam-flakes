@@ -1,9 +1,10 @@
 # Nix tooling for Flakes and BEAM Languages
 
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-
 **Table of Contents**
 
+<!-- vim-markdown-toc Marked -->
+
+- [Project Status](#project-status)
 - [Requirements](#requirements)
 - [Features](#features)
   - [Packages](#packages)
@@ -22,7 +23,12 @@
   - [Other Details](#other-details)
 - [Credits](#credits)
 
-<!-- markdown-toc end -->
+<!-- vim-markdown-toc -->
+
+## Project Status
+
+> [!WARNING]
+> Please note that this project is in low-maintenance mode. For more details on what this means in practice, please see [issue #53](https://github.com/shanesveller/nix-beam-flakes/issues/53).
 
 ## Requirements
 
